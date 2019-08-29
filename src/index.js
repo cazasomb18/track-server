@@ -1,9 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
+
+require('dotenv').config();
 
 const app = express();
 
-const mongoUri = 'mongodb+srv://admin:admin@cluster0-g3k5s.gcp.mongodb.net/test?retryWrites=true&w=majority';
+app.use(authRoutes);
+
+const mongoUri = process.env.MONGO_URI;
 
 mongoose.connect(mongoUri, {
 	useNewUrlParser: true,
